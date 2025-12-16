@@ -14,7 +14,7 @@ export default function Contact() {
     setStatus('Sending...');
     
     const formPayload = new FormData();
-    formPayload.append('access_key', 'YOUR_ACCESS_KEY_HERE'); // Get from web3forms.com
+    formPayload.append('access_key', '4436bbb1-2373-4c3c-86e2-d713b6850935'); // Get from web3forms.com
     formPayload.append('name', formData.name);
     formPayload.append('email', formData.email);
     formPayload.append('message', formData.message);
