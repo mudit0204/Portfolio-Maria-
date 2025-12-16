@@ -14,12 +14,13 @@ export default function Contact() {
     setStatus('Sending...');
     
     const formPayload = new FormData();
-    formPayload.append('access_key', '4436bbb1-2373-4c3c-86e2-d713b6850935'); // Get from web3forms.com
+    formPayload.append('access_key', '4436bbb1-2373-4c3c-86e2-d713b6850935');
     formPayload.append('name', formData.name);
     formPayload.append('email', formData.email);
     formPayload.append('message', formData.message);
     formPayload.append('subject', `Portfolio Contact from ${formData.name}`);
     formPayload.append('from_name', 'Portfolio Contact Form');
+    formPayload.append('to_email', 'muditthakre2004@gmail.com');
     formPayload.append('redirect', 'false');
 
     try {
@@ -29,16 +30,18 @@ export default function Contact() {
       });
 
       const data = await response.json();
+      console.log('Web3Forms Response:', data); // Debug log
 
       if (data.success) {
         setStatus('Message sent successfully! ✓');
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setStatus(''), 4000);
       } else {
-        setStatus('Failed to send. Please try again.');
+        setStatus(`Failed: ${data.message || 'Please try again'}`);
         setTimeout(() => setStatus(''), 4000);
       }
-    } catch {
+    } catch (error) {
+      console.error('Form submission error:', error);
       setStatus('Failed to send. Please try again.');
       setTimeout(() => setStatus(''), 4000);
     }
